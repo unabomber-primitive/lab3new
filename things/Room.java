@@ -32,7 +32,7 @@ public class Room extends Thing{
     }
 
     public int hashCode() {
-        return Objects.hash(getTheBestThingIn(), getDescr(), isMany, quant);
+        return Objects.hash(super.hashCode(), quant);
     }
 
     public boolean equals(Object obj) {
@@ -43,6 +43,6 @@ public class Room extends Thing{
         if (getClass() != obj.getClass())
             return false;
         Room objRoom = (Room) obj;
-        return getDescr().equals(objRoom.getDescr()) && getTheBestThingIn().equals(objRoom.getTheBestThingIn()) && isMany == objRoom.isMany && quant == objRoom.quant;
+        return super.equals((Thing) obj) && quant == objRoom.quant;
     }
 }

@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Child extends Human{
 
-    int quant;
+    int quant = 1;
     Human mother;
     Human father;
 
@@ -63,7 +63,7 @@ public class Child extends Human{
     }
 
     public int hashCode() {
-        return Objects.hash(getTheBestThingIn(), getDescr(), isMany, getName(), getSex(), Arrays.hashCode(missedHeroes), Arrays.hashCode(missedThings), quant, mother, father);
+        return Objects.hash(super.hashCode(), quant, mother, father);
     }
 
     public boolean equals(Object obj) {
@@ -74,6 +74,6 @@ public class Child extends Human{
         if (getClass() != obj.getClass())
             return false;
         Child objChild = (Child) obj;
-        return getDescr().equals(objChild.getDescr()) && getTheBestThingIn().equals(objChild.getTheBestThingIn()) && isMany == objChild.isMany && getName().equals(objChild.getName()) && getSex().equals(objChild.getSex()) && Arrays.equals(missedHeroes, objChild.missedHeroes) && Arrays.equals(missedThings, objChild.missedThings);
+        return super.equals((Human) obj) && mother.equals(objChild.mother) && father.equals(objChild.father) && quant == objChild.quant;
     }
 }

@@ -26,7 +26,7 @@ public class Food extends Thing{
     }
 
     public int hashCode() {
-        return Objects.hash(getTheBestThingIn(), getDescr(), isMany, quant);
+        return Objects.hash(super.hashCode(), quant);
     }
 
     public boolean equals(Object obj) {
@@ -37,6 +37,6 @@ public class Food extends Thing{
         if (getClass() != obj.getClass())
             return false;
         Food objFood = (Food) obj;
-        return getDescr().equals(objFood.getDescr()) && getTheBestThingIn().equals(objFood.getTheBestThingIn()) && isMany == objFood.isMany && quant == objFood.quant;
+        return super.equals((Thing) obj) && quant == objFood.quant;
     }
 }

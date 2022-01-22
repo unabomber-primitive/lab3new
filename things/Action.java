@@ -29,7 +29,7 @@ public class Action extends Thing{
     }
 
     public int hashCode() {
-        return Objects.hash(getTheBestThingIn(), getDescr(), isMany, getActor());
+        return Objects.hash(super.hashCode(), getActor());
     }
 
     public boolean equals(Object obj) {
@@ -40,6 +40,6 @@ public class Action extends Thing{
         if (getClass() != obj.getClass())
             return false;
         Action objAction = (Action) obj;
-        return getDescr().equals(objAction.getDescr()) && getTheBestThingIn().equals(objAction.getTheBestThingIn()) && isMany == objAction.isMany && getActor().equals(objAction.getActor());
+        return super.equals((Thing) obj) && getActor().equals(objAction.getActor());
     }
 }

@@ -71,7 +71,7 @@ public class Lunch extends Thing{
     }
 
     public int hashCode() {
-        return Objects.hash(getTheBestThingIn(), getDescr(), isMany, table, Arrays.hashCode(eaters), room);
+        return Objects.hash(super.hashCode(), getFunny(), table, Arrays.hashCode(eaters), room);
     }
 
     public boolean equals(Object obj) {
@@ -82,7 +82,7 @@ public class Lunch extends Thing{
         if (getClass() != obj.getClass())
             return false;
         Lunch objLunch = (Lunch) obj;
-        return getDescr().equals(objLunch.getDescr()) && getTheBestThingIn().equals(objLunch.getTheBestThingIn()) && isMany == objLunch.isMany && getFunny() == objLunch.getFunny() && getRoom().equals(objLunch.getRoom()) && Arrays.equals(getTablePool(), objLunch.getTablePool());
+        return super.equals((Thing) obj) && getFunny() == objLunch.getFunny() && getRoom().equals(objLunch.getRoom()) && Arrays.equals(getTablePool(), objLunch.getTablePool()) && Arrays.equals(eaters, objLunch.eaters);
     }
 }
 

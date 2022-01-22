@@ -68,7 +68,7 @@ public class Human extends Hero implements Miss, Talk {
     }
 
     public int hashCode() {
-        return Objects.hash(getTheBestThingIn(), getDescr(), isMany, getName(), getSex(), Arrays.hashCode(missedHeroes), Arrays.hashCode(missedThings));
+        return Objects.hash(super.hashCode(), getSex(), Arrays.hashCode(missedHeroes), Arrays.hashCode(missedThings));
     }
 
     public boolean equals(Object obj) {
@@ -79,6 +79,6 @@ public class Human extends Hero implements Miss, Talk {
         if (getClass() != obj.getClass())
             return false;
         Human objHuman = (Human) obj;
-        return getDescr().equals(objHuman.getDescr()) && getTheBestThingIn().equals(objHuman.getTheBestThingIn()) && isMany == objHuman.isMany && getName().equals(objHuman.getName()) && getSex().equals(objHuman.getSex()) && Arrays.equals(missedHeroes, objHuman.missedHeroes) && Arrays.equals(missedThings, objHuman.missedThings);
+        return super.equals((Hero) obj) && getSex().equals(objHuman.getSex()) && Arrays.equals(missedHeroes, objHuman.missedHeroes) && Arrays.equals(missedThings, objHuman.missedThings);
     }
 }

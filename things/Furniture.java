@@ -21,7 +21,7 @@ public class Furniture extends Thing{
     }
 
     public int hashCode() {
-        return Objects.hash(getTheBestThingIn(), getDescr(), isMany, quant);
+        return Objects.hash(super.hashCode(), quant);
     }
 
     public boolean equals(Object obj) {
@@ -32,6 +32,6 @@ public class Furniture extends Thing{
         if (getClass() != obj.getClass())
             return false;
         Furniture objFurniture = (Furniture) obj;
-        return getDescr().equals(objFurniture.getDescr()) && getTheBestThingIn().equals(objFurniture.getTheBestThingIn()) && isMany == objFurniture.isMany && quant == objFurniture.quant;
+        return super.equals((Thing) obj) && quant == objFurniture.quant;
     }
 }

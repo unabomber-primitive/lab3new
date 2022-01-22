@@ -68,7 +68,7 @@ public class DiningTable extends Furniture {
     }
 
     public int hashCode() {
-        return Objects.hash(getTheBestThingIn(), getDescr(), isMany, quant, Arrays.hashCode(dishesSlots), Arrays.hashCode(seatSpots));
+        return Objects.hash(super.hashCode(), Arrays.hashCode(dishesSlots), Arrays.hashCode(seatSpots));
     }
 
     public boolean equals(Object obj) {
@@ -79,6 +79,6 @@ public class DiningTable extends Furniture {
         if (getClass() != obj.getClass())
             return false;
         DiningTable objDiningTable = (DiningTable) obj;
-        return getDescr().equals(objDiningTable.getDescr()) && getTheBestThingIn().equals(objDiningTable.getTheBestThingIn()) && isMany == objDiningTable.isMany && quant == objDiningTable.quant && Arrays.equals(dishesSlots, objDiningTable.dishesSlots) && Arrays.equals(seatSpots, objDiningTable.seatSpots);
+        return super.equals((Furniture) obj) && Arrays.equals(dishesSlots, objDiningTable.dishesSlots) && Arrays.equals(seatSpots, objDiningTable.seatSpots);
     }
 }
