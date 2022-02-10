@@ -1,0 +1,148 @@
+@startuml
+interface interfaces.BestIn {
+~ void setTheBestThingIn(Thing)
+~ Thing getTheBestThingIn()
+}
+class heroes.Animal {
+}
+class heroes.Hero {
++ boolean isMany
+- String descr
+- String name
+- boolean eating
+# Thing theBestThingIn
++ void setTheBestThingIn(Thing)
++ Thing getTheBestThingIn()
++ void setEating(boolean)
++ boolean getEating()
++ void isEating()
++ void notEating()
++ void setName(String)
++ String getName()
++ void setDescr(String)
++ String getDescr()
++ String toString()
++ int hashCode()
++ boolean equals(Object)
+}
+class things.Room {
+~ int quant
++ String toString()
++ int hashCode()
++ boolean equals(Object)
+}
+class heroes.Human {
+# Sex sex
+~ Hero[] missedHeroes
+~ Thing[] missedThings
+~ boolean isTalking
++ String[] talkAboutSomebody(Hero)
++ Thing[] missSomething(Thing[])
++ Hero[] missSomebody(Hero[])
++ void setSex(Sex)
++ String getSex()
++ String toString()
++ int hashCode()
++ boolean equals(Object)
+}
+class things.Furniture {
+~ int quant
++ String toString()
++ int hashCode()
++ boolean equals(Object)
+}
+interface interfaces.Miss {
+~ Hero[] missSomebody(Hero[])
+~ Thing[] missSomething(Thing[])
+}
+class things.Food {
+~ int quant
++ String toString()
++ int hashCode()
++ boolean equals(Object)
+}
+interface interfaces.Eat {
+~ void isEating()
+~ void notEating()
+}
+class things.DiningTable {
+- Food[] dishesSlots
+- Human[] seatSpots
++ Food[] getDishesSlots()
++ Human[] getSeatSpots()
++ void addDishes(Food[])
++ void addSeaters(Human[])
++ void removeDishes()
++ void removeSeaters()
++ String toString()
++ int hashCode()
++ boolean equals(Object)
+}
+class things.Action {
+# Human actor
++ void setActor(Human)
++ Human getActor()
++ String toString()
++ int hashCode()
++ boolean equals(Object)
+}
+class things.Lunch {
+- boolean isFunny
+~ DiningTable table
+~ Human[] eaters
+~ Room room
++ void setRoom(Room)
++ Room getRoom()
++ void setFunny(boolean)
++ String[] getTablePool()
++ boolean getFunny()
++ void endLunch()
++ String toString()
++ int hashCode()
++ boolean equals(Object)
+}
+abstract class things.Thing {
++ boolean isMany
+- String descr
+# Thing theBestThingIn
++ void setTheBestThingIn(Thing)
++ Thing getTheBestThingIn()
++ void setDescr(String)
++ String getDescr()
++ String toString()
++ int hashCode()
++ boolean equals(Object)
+}
+class Story {
++ {static} void main(String[])
+}
+class heroes.Child {
+~ int quant
+~ Human mother
+~ Human father
++ void setSex(Sex)
++ String getSex(String)
++ String toString()
++ int hashCode()
++ boolean equals(Object)
+}
+interface interfaces.Talk {
+~ String[] talkAboutSomebody(Hero)
+}
+
+
+heroes.Hero <|-- heroes.Animal
+interfaces.Eat <|.. heroes.Hero
+interfaces.BestIn <|.. heroes.Hero
+things.Thing <|-- things.Room
+interfaces.Miss <|.. heroes.Human
+interfaces.Talk <|.. heroes.Human
+heroes.Hero <|-- heroes.Human
+things.Thing <|-- things.Furniture
+things.Thing <|-- things.Food
+things.Furniture <|-- things.DiningTable
+things.Thing <|-- things.Action
+things.Thing <|-- things.Lunch
+interfaces.BestIn <|.. things.Thing
+heroes.Human <|-- heroes.Child
+@enduml
