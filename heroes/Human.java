@@ -13,6 +13,24 @@ public class Human extends Hero implements Miss, Talk {
     Hero[] missedHeroes;
     Thing[] missedThings;
     boolean isTalking;
+    private int karma = 123;
+
+    static public enum Sex {
+        MALE,
+        FEMALE
+    }
+
+    public void setKarma(int karma) {
+        this.karma = karma;
+    }
+
+    public void addKarma(int karma) {
+        this.karma += karma;
+    }
+
+    public int getKarma() {
+        return karma;
+    }
 
     public String[] talkAboutSomebody(Hero hero) {
         this.isTalking = true;
@@ -31,15 +49,15 @@ public class Human extends Hero implements Miss, Talk {
     }
 
     public void setSex(Sex sex) {
-        if(sex.equals(Sex.MALE) | sex.equals(Sex.FEMALE)) {
+        if(sex.equals(Human.Sex.MALE) | sex.equals(Human.Sex.FEMALE)) {
             this.sex = sex;
-            this.setDescr(sex.equals(Sex.MALE) ? "мужчина" : "женщина");
+            this.setDescr(sex.equals(Human.Sex.MALE) ? "мужчина" : "женщина");
         }
         else System.out.println("введен некорректный пол");
     }
 
     public String getSex() {
-        return this.sex.equals(Sex.MALE) ? "мужчина" : (this.sex.equals(Sex.FEMALE) ? "женщина" : "пол неопределен");
+        return this.sex.equals(Human.Sex.MALE) ? "мужчина" : (this.sex.equals(Human.Sex.FEMALE) ? "женщина" : "пол неопределен");
     }
 
     public Human() {

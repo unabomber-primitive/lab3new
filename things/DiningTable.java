@@ -6,10 +6,106 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class DiningTable extends Furniture {
-    private Food[] dishesSlots = new Food[10];
+    private Dishe[] dishesSlots = new Dishe[10];
     private Human[] seatSpots = new Human[6];
+    private Human kitchener;
 
-    public Food[] getDishesSlots() {
+    public Human getKitchener() {
+        return kitchener;
+    }
+
+    public void setKitchener(Human kitchener) {
+        this.kitchener = kitchener;
+        for(Dishe dishe : dishesSlots) {
+            if(dishe != null) {
+                dishe.setHumanWhoPreparedTheDish(kitchener);
+            }
+        }
+    }
+
+    public class Dishe extends Food {
+        private Human humanWhoPreparedTheDish;
+
+        public Dishe(String name) {
+            super(name);
+            for (int i=0; i<10; i++) {
+                if(dishesSlots[i] == null) {
+                    dishesSlots[i] = this;
+                    break;
+                }
+            }
+        }
+
+        public Dishe() {
+            this.isMany = false;
+            this.setDescr("блюдо");
+            for (int i=0; i<10; i++) {
+                if(dishesSlots[i] == null) {
+                    dishesSlots[i] = this;
+                    break;
+                }
+            }
+        }
+
+        public Dishe(int quant) {
+            this.quant = quant;
+            this.isMany = true;
+            this.setDescr("блюда");
+            for (int i=0; i<10; i++) {
+                if(dishesSlots[i] == null) {
+                    dishesSlots[i] = this;
+                    break;
+                }
+            }
+        }
+
+        public Dishe(String name, Human humanWhoPreparedTheDish) {
+            super(name);
+            this.humanWhoPreparedTheDish = humanWhoPreparedTheDish;
+            for (int i=0; i<10; i++) {
+                if(dishesSlots[i] == null) {
+                    dishesSlots[i] = this;
+                    break;
+                }
+            }
+        }
+
+        public Dishe(Human humanWhoPreparedTheDish) {
+            this.isMany = false;
+            this.setDescr("блюдо");
+            this.humanWhoPreparedTheDish = humanWhoPreparedTheDish;
+            for (int i=0; i<10; i++) {
+                if(dishesSlots[i] == null) {
+                    dishesSlots[i] = this;
+                    break;
+                }
+            }
+        }
+
+        public Dishe(int quant, Human humanWhoPreparedTheDish) {
+            this.quant = quant;
+            this.isMany = true;
+            this.setDescr("блюда");
+            this.humanWhoPreparedTheDish = humanWhoPreparedTheDish;
+            for (int i=0; i<10; i++) {
+                if(dishesSlots[i] == null) {
+                    dishesSlots[i] = this;
+                    break;
+                }
+            }
+        }
+
+        public void setHumanWhoPreparedTheDish(Human humanWhoPreparedTheDish) {
+            this.humanWhoPreparedTheDish = humanWhoPreparedTheDish;
+        }
+
+        public Human getHumanWhoPreparedTheDish() {
+            return humanWhoPreparedTheDish;
+        }
+
+    }
+
+    public Dishe[] getDishesSlots() {
         return this.dishesSlots;
     }
 
@@ -17,40 +113,53 @@ public class DiningTable extends Furniture {
         return this.seatSpots;
     }
 
-    public void addDishes(Food[] dishes) {
+    public void addDishes(Dishe[] dishes) {
+        removeDishes();
         int i = 0;
-        for(Food dishe : dishes) {
+        for(Dishe dishe : dishes) {
             this.dishesSlots[i] = dishe;
             i += 1;
         }
-    };
+    }
 
     public void addSeaters(Human[] seaters) {
+        removeSeaters();
         int i = 0;
         for(Human seater : seaters) {
             this.seatSpots[i] = seater;
             i += 1;
         }
-    };
+    }
 
     public void removeDishes() {
-        for(Food dishe : this.dishesSlots) {
-            dishe = null;
+        for(int i=0; i<this.dishesSlots.length; i++) {
+            if(this.dishesSlots[i] != null) {
+                this.dishesSlots[i] = null;
+            }
         }
     }
 
     public void removeSeaters() {
-        for(Human seater : this.seatSpots) {
-            seater = null;
+        for(int i=0; i<this.seatSpots.length; i++) {
+            if(this.seatSpots[i] != null) {
+                this.seatSpots[i] = null;
+            }
         }
     }
 
-    public DiningTable(Food[] dishes, Human[] seaters) {
+    public DiningTable(Human[] seaters) {
         this.isMany = false;
         this.setDescr("стол");
-        this.addDishes(dishes);
         this.addSeaters(seaters);
     }
+
+    /*public DiningTable(Food[] food, Human[] seaters, Human kitchener) {
+        this.isMany = false;
+        this.setDescr("стол");
+        this.addSeaters(seaters);
+        Dishe[] dishes = Stream.of(food).map((x) -> this.new (Dishe) x)
+        this.addDishes(dishes);
+    }*/
 
     public DiningTable() {
         this.isMany = false;

@@ -26,7 +26,7 @@ public class Lunch extends Thing{
         StringBuilder dishes = new StringBuilder();
         StringBuilder humans = new StringBuilder();
         int humancounter = 0;
-        for(Food i : table.getDishesSlots()) {
+        for(DiningTable.Dishe i : table.getDishesSlots()) {
             if(i!=null) {
                 dishes.append(dishes.toString().equals("") ? "" : ", ").append(i.getDescr());
             }
@@ -49,8 +49,10 @@ public class Lunch extends Thing{
 //        System.out.println(isFunny ? " Все-таки это был веселый обед " : " И все же это был невеселый обед ");
     }
 
-    public Lunch(Food[] dishes, Human[] eaters) {
-        this.table = new DiningTable(dishes, eaters);
+    public Lunch(DiningTable diningTable, DiningTable.Dishe[] dishes, Human[] eaters) {
+        this.table = diningTable;
+        this.table.addDishes(dishes);
+        this.table.addSeaters(eaters);
         this.eaters = eaters;
         for(Human i : this.eaters) {
             i.isEating();
@@ -59,11 +61,46 @@ public class Lunch extends Thing{
 
     public void endLunch() {
         this.table.removeDishes();
-        for(Human i : this.eaters) {
-            i.notEating();
-            i = null;
+        for(int i=0; i<this.eaters.length; i++) {
+            eaters[i].notEating();
+            eaters[i] = null;
         }
         this.table.removeSeaters();
+    }
+
+    public void transcedentalCosmicEternalPunishment() {
+        class LastJudgement {
+            Human[] pool;
+            public LastJudgement(Human[] pool) {
+                this.pool = pool;
+            }
+
+            public boolean isGuilty(Human human) {
+                return human.getKarma() < -5000;
+            }
+
+            public Human[] selection() {
+                for(int k=0; k < pool.length; k++) {
+                    if(pool[k] != null && !isGuilty(pool[k])) {
+                        pool[k] = null;
+                    }
+                }
+                return pool;
+            }
+        }
+
+        LastJudgement lastJudgement = new LastJudgement(eaters);
+        int counter = 0;
+        for(Human human : lastJudgement.selection()) {
+            if(human != null) {
+                System.out.println(human.getName() + ", последний раз вкусив пищу, внезапно умирает и обретает вечные страдания в загробном мире.");
+                ++counter;
+            }
+        }
+        if(counter == 0) {
+            System.out.println("\nИ были они таковы.");
+        }
+
     }
 
     public String toString() {

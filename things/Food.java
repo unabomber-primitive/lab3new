@@ -12,13 +12,13 @@ public class Food extends Thing{
 
     public Food() {
         this.isMany = false;
-        this.setDescr("блюда");
+        this.setDescr("продукт");
     }
 
     public Food(int quant) {
         this.quant = quant;
         this.isMany = true;
-        this.setDescr("блюдо");
+        this.setDescr("продукты");
     }
 
     public String toString() {
