@@ -8,7 +8,9 @@ public class Action extends Thing{
     protected Human actor;
 
     public void setActor(Human actor) {
-        this.actor = actor;
+        if(actor == null) {
+            throw new NullPointerException();
+        } else this.actor = actor;
     }
 
     public Human getActor() {

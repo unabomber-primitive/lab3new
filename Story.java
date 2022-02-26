@@ -1,15 +1,22 @@
 import heroes.Child;
 import heroes.Hero;
 import heroes.Human;
+import heroes.IncorrectSexExcepion;
 import things.*;
 
 public class Story {
     public static void main(String[] args) {
         Human bok = new Human("Фрекен Бок");
+        try {
+            bok.setSex(Human.Sex.FEMALE);
+        } catch (IncorrectSexExcepion ignored) {}
         Human mother = new Human("Мама");
         Human father = new Human("Папа");
         Human frida = new Human("Фрида");
         Child mal = new Child("Малыш", mother,father);
+        try {
+            mal.setSex(Human.Sex.MALE);
+        } catch (IncorrectSexExcepion ignored) {}
         Child bos = new Child("Босе", mother,father);
         Child bet = new Child("Бетан", mother,father);
         Action malEating = new Action("Я его ем", mal);

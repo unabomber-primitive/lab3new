@@ -15,10 +15,14 @@ public class DiningTable extends Furniture {
     }
 
     public void setKitchener(Human kitchener) {
-        this.kitchener = kitchener;
-        for(Dishe dishe : dishesSlots) {
-            if(dishe != null) {
-                dishe.setHumanWhoPreparedTheDish(kitchener);
+        if(kitchener == null) {
+            throw new NullPointerException();
+        } else {
+            this.kitchener = kitchener;
+            for (Dishe dishe : dishesSlots) {
+                if (dishe != null) {
+                    dishe.setHumanWhoPreparedTheDish(kitchener);
+                }
             }
         }
     }
@@ -48,7 +52,7 @@ public class DiningTable extends Furniture {
         }
 
         public Dishe(int quant) {
-            this.quant = quant;
+            this.setQuant(quant);
             this.isMany = true;
             this.setDescr("блюда");
             for (int i=0; i<10; i++) {
@@ -61,7 +65,7 @@ public class DiningTable extends Furniture {
 
         public Dishe(String name, Human humanWhoPreparedTheDish) {
             super(name);
-            this.humanWhoPreparedTheDish = humanWhoPreparedTheDish;
+            this.setHumanWhoPreparedTheDish(humanWhoPreparedTheDish);
             for (int i=0; i<10; i++) {
                 if(dishesSlots[i] == null) {
                     dishesSlots[i] = this;
@@ -73,7 +77,7 @@ public class DiningTable extends Furniture {
         public Dishe(Human humanWhoPreparedTheDish) {
             this.isMany = false;
             this.setDescr("блюдо");
-            this.humanWhoPreparedTheDish = humanWhoPreparedTheDish;
+            this.setHumanWhoPreparedTheDish(humanWhoPreparedTheDish);
             for (int i=0; i<10; i++) {
                 if(dishesSlots[i] == null) {
                     dishesSlots[i] = this;
@@ -83,10 +87,10 @@ public class DiningTable extends Furniture {
         }
 
         public Dishe(int quant, Human humanWhoPreparedTheDish) {
-            this.quant = quant;
+            this.setQuant(quant);
             this.isMany = true;
             this.setDescr("блюда");
-            this.humanWhoPreparedTheDish = humanWhoPreparedTheDish;
+            this.setHumanWhoPreparedTheDish(humanWhoPreparedTheDish);
             for (int i=0; i<10; i++) {
                 if(dishesSlots[i] == null) {
                     dishesSlots[i] = this;
@@ -96,7 +100,9 @@ public class DiningTable extends Furniture {
         }
 
         public void setHumanWhoPreparedTheDish(Human humanWhoPreparedTheDish) {
-            this.humanWhoPreparedTheDish = humanWhoPreparedTheDish;
+            if(humanWhoPreparedTheDish == null) {
+                throw new NullPointerException();
+            }else this.humanWhoPreparedTheDish = humanWhoPreparedTheDish;
         }
 
         public Human getHumanWhoPreparedTheDish() {
@@ -114,20 +120,28 @@ public class DiningTable extends Furniture {
     }
 
     public void addDishes(Dishe[] dishes) {
-        removeDishes();
-        int i = 0;
-        for(Dishe dishe : dishes) {
-            this.dishesSlots[i] = dishe;
-            i += 1;
+        if(dishes == null) {
+            throw new NullPointerException();
+        }else {
+            removeDishes();
+            int i = 0;
+            for (Dishe dishe : dishes) {
+                this.dishesSlots[i] = dishe;
+                i += 1;
+            }
         }
     }
 
     public void addSeaters(Human[] seaters) {
-        removeSeaters();
-        int i = 0;
-        for(Human seater : seaters) {
-            this.seatSpots[i] = seater;
-            i += 1;
+        if(seaters == null) {
+            throw new NullPointerException();
+        }else {
+            removeSeaters();
+            int i = 0;
+            for (Human seater : seaters) {
+                this.seatSpots[i] = seater;
+                i += 1;
+            }
         }
     }
 
@@ -167,13 +181,13 @@ public class DiningTable extends Furniture {
     }
 
     public DiningTable(int quant) {
-        this.quant = quant;
+        this.setQuant(quant);
         this.isMany = true;
         this.setDescr("столы");
     }
 
     public String toString() {
-        return getClass().getName() + " descr: " + getDescr() + " isMany: " + isMany + (getTheBestThingIn() == null ? "" : " the best thing in: " + getTheBestThingIn().getDescr()) + " quant: " + quant + " dishes: " + Arrays.toString(dishesSlots) + " seat_spots: " + Arrays.toString(seatSpots);
+        return getClass().getName() + " descr: " + getDescr() + " isMany: " + isMany + (getTheBestThingIn() == null ? "" : " the best thing in: " + getTheBestThingIn().getDescr()) + " quant: " + getQuant() + " dishes: " + Arrays.toString(dishesSlots) + " seat_spots: " + Arrays.toString(seatSpots);
     }
 
     public int hashCode() {

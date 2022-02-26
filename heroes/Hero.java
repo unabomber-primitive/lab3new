@@ -16,7 +16,11 @@ public class Hero implements Eat, BestIn {
     protected Thing theBestThingIn;
 
     public void setTheBestThingIn(Thing thing) {
-        this.theBestThingIn = thing;
+        if(thing == null) {
+            throw new NullPointerException();
+        } else {
+            this.theBestThingIn = thing;
+        }
     }
 
     public Thing getTheBestThingIn() {
@@ -47,7 +51,6 @@ public class Hero implements Eat, BestIn {
 
     public Hero(String name) {
         this.isMany = false;
-        this.setDescr("персонаж");
         this.setName(name);
     }
 
@@ -56,13 +59,19 @@ public class Hero implements Eat, BestIn {
         this.setDescr("персонажи");
     }
 
-    public Hero(String groupName, int quant) {
+    public Hero(String groupName, int quant){
         this.isMany = true;
-        this.setDescr(groupName);
+        setDescr(groupName);
     }
 
     public void setName(String name) {
-        this.name = name;
+        if(name == null) {
+            throw new NullPointerException();
+        } else if(name.equals("")) {
+            throw new IllegalArgumentException("Имя не может быть пустой строкой.");
+        } else {
+            this.name = name;
+        }
     }
 
     public String getName() {
@@ -70,7 +79,13 @@ public class Hero implements Eat, BestIn {
     }
 
     public void setDescr(String descr) {
-        this.descr = descr;
+        if(descr == null) {
+            throw new NullPointerException();
+        } else if(descr.equals("")) {
+            throw new IllegalArgumentException("Описание не может быть пустой строкой.");
+        } else {
+            this.descr = descr;
+        }
     }
 
     public String getDescr() {

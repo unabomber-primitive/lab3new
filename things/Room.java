@@ -11,7 +11,9 @@ public class Room extends Thing{
     }
 
     public Room(int quant) {
-        this.quant = quant;
+        if(quant < 0) {
+            throw new IllegalArgumentException("Количество не может быть отрицательным числом.");
+        }else this.quant = quant;
         this.isMany = true;
         this.setDescr("комнаты");
     }
@@ -22,7 +24,9 @@ public class Room extends Thing{
     }
 
     public Room(String descr, int quant) {
-        this.quant = quant;
+        if(quant < 0) {
+            throw new IllegalArgumentException("Количество не может быть отрицательным числом.");
+        }else this.quant = quant;
         this.isMany = true;
         this.setDescr(descr);
     }

@@ -3,7 +3,17 @@ package things;
 import java.util.Objects;
 
 public class Food extends Thing{
-    int quant;
+    private int quant;
+
+    public void setQuant(int quant) {
+        if(quant < 0) {
+            throw new IllegalArgumentException("Количество не может быть отрицательным числом.");
+        } else this.quant = quant;
+    }
+
+    public int getQuant() {
+        return quant;
+    }
 
     public Food(String name) {
         this.isMany = false;
@@ -16,7 +26,7 @@ public class Food extends Thing{
     }
 
     public Food(int quant) {
-        this.quant = quant;
+        this.setQuant(quant);
         this.isMany = true;
         this.setDescr("продукты");
     }

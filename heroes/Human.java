@@ -34,7 +34,11 @@ public class Human extends Hero implements Miss, Talk {
 
     public String[] talkAboutSomebody(Hero hero) {
         this.isTalking = true;
-        return new String[] {this.getName(), hero.getName()};
+        if(hero == null) {
+            throw new NullPointerException();
+        } else {
+            return new String[] {this.getName(), hero.getName()};
+        }
 //        System.out.println(this.getName() + " говорит про " + hero.getName());
     }
 
@@ -48,12 +52,12 @@ public class Human extends Hero implements Miss, Talk {
         return this.missedHeroes;
     }
 
-    public void setSex(Sex sex) {
-        if(sex.equals(Human.Sex.MALE) | sex.equals(Human.Sex.FEMALE)) {
+    public void setSex(Sex sex) throws IncorrectSexExcepion {
+        if(sex.equals(Human.Sex.MALE) || sex.equals(Human.Sex.FEMALE)) {
             this.sex = sex;
             this.setDescr(sex.equals(Human.Sex.MALE) ? "мужчина" : "женщина");
         }
-        else System.out.println("введен некорректный пол");
+        else throw new IncorrectSexExcepion("There are only two genders.");
     }
 
     public String getSex() {

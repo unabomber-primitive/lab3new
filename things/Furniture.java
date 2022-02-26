@@ -3,7 +3,17 @@ package things;
 import java.util.Objects;
 
 public class Furniture extends Thing{
-    int quant;
+    private int quant;
+
+    public int getQuant() {
+        return quant;
+    }
+
+    public void setQuant(int quant) {
+        if(quant < 0) {
+            throw new IllegalArgumentException("Количество не может быть отрицательным числом.");
+        }else this.quant = quant;
+    }
 
     public Furniture() {
         this.isMany = false;
@@ -11,7 +21,7 @@ public class Furniture extends Thing{
     }
 
     public Furniture(int quant) {
-        this.quant = quant;
+        this.setQuant(quant);
         this.isMany = true;
         this.setDescr("мебельные предметы");
     }

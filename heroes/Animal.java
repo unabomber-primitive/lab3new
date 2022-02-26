@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Animal extends Hero{
 
-    public Animal() {
+    public Animal(){
         this.isMany = false;
         this.setDescr("животное");
     }

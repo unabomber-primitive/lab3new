@@ -10,7 +10,9 @@ public abstract class Thing implements BestIn {
     protected Thing theBestThingIn;
 
     public void setTheBestThingIn(Thing thing) {
-        this.theBestThingIn = thing;
+        if(thing == null) {
+            throw new NullPointerException();
+        }else this.theBestThingIn = thing;
     }
 
     public Thing getTheBestThingIn() {
@@ -18,7 +20,13 @@ public abstract class Thing implements BestIn {
     }
 
     public void setDescr(String descr) {
-        this.descr = descr;
+        if(descr == null) {
+            throw new NullPointerException();
+        } else if(descr.equals("")) {
+            throw new IllegalArgumentException("Описание не может быть пустой строкой.");
+        } else {
+            this.descr = descr;
+        }
     }
 
     public String getDescr() {

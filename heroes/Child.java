@@ -9,15 +9,15 @@ public class Child extends Human{
     Human mother;
     Human father;
 
-    public void setSex(Sex sex) {
-        if(sex.equals(Sex.MALE) | sex.equals(Sex.FEMALE)) {
+    public void setSex(Sex sex) throws IncorrectSexExcepion{
+        if(sex.equals(Sex.MALE) || sex.equals(Sex.FEMALE)) {
             this.sex = sex;
             this.setDescr(sex.equals(Sex.MALE) ? "мальчик" : "девочка");
         }
-        else System.out.println("введен некорректный пол");
+        else throw new IncorrectSexExcepion("There are only two genders.");
     }
 
-    public String getSex(String sex) {
+    public String getSex() {
         return this.sex.equals(Sex.MALE) ? "мальчик" : (this.sex.equals(Sex.FEMALE) ? "девочка" : "пол неопределен");
     }
 
@@ -28,7 +28,9 @@ public class Child extends Human{
 
     public Child(int quant, Human mother, Human father) {
         this.isMany = true;
-        this.quant = quant;
+        if(quant < 0) {
+            throw new IllegalArgumentException("Количество не может быть отрицательным числом.");
+        }else this.quant = quant;
         this.setDescr("дети");
         this.mother = mother;
         this.father = father;

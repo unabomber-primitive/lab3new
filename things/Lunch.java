@@ -11,7 +11,9 @@ public class Lunch extends Thing{
     Room room;
 
     public void setRoom(Room room) {
-        this.room = room;
+        if(room == null) {
+            throw new NullPointerException();
+        }else this.room = room;
     }
 
     public Room getRoom() {
@@ -50,10 +52,14 @@ public class Lunch extends Thing{
     }
 
     public Lunch(DiningTable diningTable, DiningTable.Dishe[] dishes, Human[] eaters) {
-        this.table = diningTable;
+        if(diningTable == null) {
+            throw new NullPointerException();
+        }else this.table = diningTable;
         this.table.addDishes(dishes);
         this.table.addSeaters(eaters);
-        this.eaters = eaters;
+        if(eaters == null) {
+            throw new NullPointerException();
+        }else this.eaters = eaters;
         for(Human i : this.eaters) {
             i.isEating();
         }
@@ -72,11 +78,15 @@ public class Lunch extends Thing{
         class LastJudgement {
             Human[] pool;
             public LastJudgement(Human[] pool) {
-                this.pool = pool;
+                if(pool == null) {
+                    throw new NullPointerException();
+                }else this.pool = pool;
             }
 
             public boolean isGuilty(Human human) {
-                return human.getKarma() < -5000;
+                if(human == null) {
+                    throw new NullPointerException();
+                }else return human.getKarma() < -5000;
             }
 
             public Human[] selection() {
